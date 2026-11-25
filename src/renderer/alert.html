@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'">
+<style>
+html,body{margin:0;height:100%;font:13px/1.4 "Segoe UI",system-ui,sans-serif;color:#fff;overflow:hidden;-webkit-app-region:drag}
+body{background:#2a0a12;border:2px solid #ff1f56;box-sizing:border-box;display:flex;flex-direction:column;padding:12px 14px;animation:pulse 1s infinite}
+body.warn{background:#2a1a05;border-color:#ff8a00;animation:none}
+body.ok{background:#082015;border-color:#21d07a;animation:none}
+@keyframes pulse{50%{border-color:#ff8a00;background:#3a0c18}}
+.t{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.t::before{content:"";width:10px;height:10px;border-radius:50%;background:currentColor}
+body.error .t{color:#ff7d9b}body.warn .t{color:#ffb35c}body.ok .t{color:#5be3a0}
+.x{flex:1;margin-top:6px;color:#e8e8ef;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
+.b{display:flex;gap:8px;justify-content:flex-end;-webkit-app-region:no-drag}
+button{border:1px solid #555;background:#1b1b22;color:#fff;border-radius:8px;padding:5px 12px;cursor:pointer;font:inherit}
+button.p{background:#ff1f56;border-color:#ff1f56}
+body.warn button.p{background:#ff8a00;border-color:#ff8a00;color:#111}
+</style></head>
+<body class="error">
+<div class="t" id="t">Posting Assistant</div>
+<div class="x" id="x"></div>
+<div class="b"><button id="d">Dismiss</button><button class="p" id="o">Open</button></div>
+<script src="alert.js"></script>
+</body></html>

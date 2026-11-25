@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.cache/
+Data/
+*.location.json
+.env*
+!.env.example
+*.pem
+*.key
+secrets.json
+settings.json
+test/

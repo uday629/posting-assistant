@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Posting Assistant</title>
+<style>
+  :root { --bg:#08080a; --card:#121216; --line:#24242c; --text:#ececf1; --mute:#9a9aa8; --a:#7c5cff; --b:#22d3ee; --warn:#f5a524; }
+  @media (prefers-color-scheme: light) { :root { --bg:#f6f6f9; --card:#ffffff; --line:#e1e1ea; --text:#17171c; --mute:#5d5d6b; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:900px; margin:0 auto; padding:48px 20px 80px; }
+  h1 { font-size:2.4rem; margin:0 0 8px; background:linear-gradient(90deg,var(--a),var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  h2 { font-size:1.45rem; margin:48px 0 12px; padding-top:8px; }
+  h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p, li { color:var(--text); }
+  .lead { color:var(--mute); font-size:1.15rem; margin:0 0 24px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:14px 0; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+  .grid .card { margin:0; }
+  .tag { display:inline-block; font-size:.78rem; padding:2px 10px; border-radius:99px; border:1px solid var(--line); color:var(--mute); margin-right:6px; }
+  code, kbd { font:0.9em ui-monospace,"JetBrains Mono",Consolas,monospace; background:rgba(124,92,255,.14); padding:1px 6px; border-radius:6px; }
+  pre { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; overflow:auto; }
+  pre code { background:none; padding:0; }
+  .note { border-left:3px solid var(--warn); padding:10px 16px; background:rgba(245,165,36,.08); border-radius:0 10px 10px 0; margin:14px 0; }
+  ol li, ul li { margin:6px 0; }
+  a { color:var(--b); }
+  table { width:100%; border-collapse:collapse; margin:10px 0; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mute); font-weight:600; font-size:.9rem; }
+  nav { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 0; }
+  nav a { text-decoration:none; font-size:.9rem; border:1px solid var(--line); border-radius:99px; padding:4px 14px; color:var(--text); }
+  footer { margin-top:56px; color:var(--mute); font-size:.92rem; border-top:1px solid var(--line); padding-top:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Posting Assistant</h1>
+<p class="lead">An AI posting agent for your desktop. Pick videos and posts from your computer, let it write captions in your own style, and schedule them to many channels in one go.</p>
+<span class="tag">Version 1.6.0</span><span class="tag">Windows</span><span class="tag">macOS (unsigned build)</span>
+<nav>
+  <a href="#who">Who made it</a><a href="#why">Why</a><a href="#for">Who it is for</a><a href="#features">Features</a>
+  <a href="#install">Install</a><a href="#start">First run</a><a href="#use">How to use</a><a href="#study">Competitor study</a>
+  <a href="#privacy">Privacy and safety</a><a href="#limits">Limits</a><a href="#build">Build it yourself</a><a href="#third">Third-party</a><a href="#notincluded">Not included</a>
+</nav>
+
+<h2 id="who">Who made it</h2>
+<div class="card">
+  <p>Posting Assistant is made by <b>Bunnys Framelab</b> (Bunny). Instagram: <a href="https://www.instagram.com/bunnysframelab/">@bunnysframelab</a>.</p>
+  <p>It is built with Electron. The AI parts run on a model that you choose, and by default that is a local model on your own PC.</p>
+</div>
+
+<h2 id="why">Why it exists</h2>
+<div class="card">
+  <p>Posting the same video to YouTube, Instagram, TikTok and other channels means uploading it again and again, rewriting the caption for each platform, and picking times by hand. That is slow and easy to get wrong, especially when you run more than one account.</p>
+  <p>Posting Assistant does that work for you. You say what to post and where, it writes the captions, opens the real scheduling site in a private window, fills everything in and checks the result before it finishes.</p>
+</div>
+
+<h2 id="for">Who it is for</h2>
+<div class="grid">
+  <div class="card"><h3>Video creators</h3><p>Short-video and channel owners who post the same content to several platforms.</p></div>
+  <div class="card"><h3>Social media managers</h3><p>People who look after several accounts. Each account keeps its own private sign-in.</p></div>
+  <div class="card"><h3>Small teams and agencies</h3><p>Anyone who wants a repeatable plan: a folder of videos, a sheet, and a "post the next N" button.</p></div>
+</div>
+
+<h2 id="features">What it does</h2>
+<table>
+  <tr><th>Area</th><th>What you get</th></tr>
+  <tr><td><b>Chat</b></td><td>Tell the agent what to post. Drag and drop files. Use <code>/name</code> commands for skills, formats and caption styles, and <code>@</code> to pick an account or channel.</td></tr>
+  <tr><td><b>Posting through Buffer</b></td><td>Posts through the Buffer website in the app's own browser, not the API. One upload can go to several channels, each with its own caption and title. Drafts, scheduled times, queue checks and duplicate protection are built in.</td></tr>
+  <tr><td><b>Captions</b></td><td>Length, tone, structure and psychology triggers are adjustable. The writer learns your style from your past posts and your edits, and has a "humanize" pass to avoid robotic text.</td></tr>
+  <tr><td><b>Writer</b></td><td>Scripts, LinkedIn posts, newsletters, captions and threads, plus a video kit and saved posts.</td></tr>
+  <tr><td><b>Workflows</b></td><td>Folder plans with a CSV sheet. Press "next N" and it continues after the last scheduled slot.</td></tr>
+  <tr><td><b>Monitor</b></td><td>Live view of the posting browser, job log, post history, a calendar, and an Undo for a job. You can take control at any step.</td></tr>
+  <tr><td><b>Competitor study</b></td><td>Study a profile, find viral posts, and see a full growth journey. See the section below.</td></tr>
+  <tr><td><b>Accounts</b></td><td>Any number of Buffer and other accounts. Each one lives in its own private browser profile.</td></tr>
+  <tr><td><b>Alerts</b></td><td>On-screen alerts and optional Telegram messages when a job needs you, with quiet hours.</td></tr>
+</table>
+
+<h2 id="install">Install</h2>
+<h3>Windows 10 / 11</h3>
+<ol>
+  <li>Download <code>Posting Assistant Setup 1.6.0.exe</code> from the <b>Releases</b> page of this repository.</li>
+  <li>Run it, choose a folder, and finish. A desktop shortcut is created.</li>
+  <li>Windows may show a SmartScreen warning because the installer is not code signed. Choose "More info", then "Run anyway".</li>
+</ol>
+<h3>macOS (Apple Silicon and Intel)</h3>
+<ol>
+  <li>Download the <code>.dmg</code> for your Mac (<code>arm64</code> for M1 and newer, <code>x64</code> for Intel) from the <b>Releases</b> page, or build it with the "Build Mac app" workflow under the Actions tab.</li>
+  <li>Open the <code>.dmg</code> and drag Posting Assistant into Applications.</li>
+  <li>The app is not signed or notarized. The first time, right-click the app and choose <b>Open</b>, then confirm. If macOS still blocks it, run this once in Terminal:
+<pre><code>xattr -dr com.apple.quarantine "/Applications/Posting Assistant.app"</code></pre></li>
+</ol>
+<div class="note"><b>Mac status.</b> The Mac build is made by an automated build and has not been tested on a real Mac by the author. Core posting and the writer should work. Automatic install of Ollama and the speech engine is Windows only, so on a Mac you install those two yourself (see below). Please report problems in the Issues tab.</div>
+
+<h2 id="start">First run (about 10 minutes)</h2>
+<ol>
+  <li><b>Pick a data folder.</b> Windows uses a folder on a non-system drive when one exists. Mac uses <code>Documents/Posting Assistant Data</code>. You can change it in Settings.</li>
+  <li><b>Set up an AI model</b> (page "AI models"). Easiest is Ollama:
+    <ul>
+      <li>Windows: the app can download and install Ollama for you.</li>
+      <li>Mac: download Ollama from <a href="https://ollama.com/download">ollama.com/download</a>, open it once, then press Refresh in the app.</li>
+      <li>Pull or import a model. A vision model helps because it can look at your video frames. Bigger models need more memory, so pick one that fits your computer.</li>
+    </ul>
+  </li>
+  <li><b>Add an account</b> (page "Accounts"). Press Add, sign in to Buffer once in the window that opens, then let the app read your channels. You need a Buffer account. The free plan keeps 10 queued posts per channel.</li>
+  <li><b>Optional, speech to text</b> (Models, Speech to text). Windows: press Install. Mac: run <code>brew install whisper.cpp</code> in Terminal first, then choose a speech model in the app.</li>
+</ol>
+
+<h2 id="use">How to use it</h2>
+<h3>Post a video from chat</h3>
+<ol>
+  <li>Open <b>Chat</b> and drag in one or more videos.</li>
+  <li>Type what you want, for example: <code>post this to @MyAccount tomorrow 7:30pm, funny tone</code>.</li>
+  <li>The agent shows a plan. Check the accounts, channels, captions and times, then confirm.</li>
+  <li>Watch it work in <b>Monitor</b>. It writes the captions, fills the Buffer composer, sets the date and time, checks the result, and confirms.</li>
+</ol>
+<div class="note"><b>Try drafts first.</b> Ask for "save as draft" the first time. Nothing is scheduled until you are happy.</div>
+<h3>Post a whole folder</h3>
+<p>Use <b>Workflows</b>: choose a folder and the channels, then press "next N" to schedule the next batch. A CSV sheet keeps track of what is done.</p>
+<h3>Write without posting</h3>
+<p>Use <b>Writer</b> for scripts, LinkedIn posts, newsletters and threads. Save the ones you like.</p>
+
+<h2 id="study">Competitor study</h2>
+<p>Open <b>Competitor study</b> and paste a profile link.</p>
+<ul>
+  <li><b>Study profile</b>: captions, hashtags, best days and hours, hooks and tone. Works for YouTube, Instagram, TikTok, Facebook, LinkedIn, X and Threads. The result can become a caption style, a format or a skill.</li>
+  <li><b>Viral posts</b>: reads views for every post and marks the ones that beat the profile's typical views (default 3 times, adjustable to 2, 5 or 10). Shows Recent viral, All viral and a chart of all posts. Open any post for a breakdown of hook, topic, structure, why it spread and ideas to reuse.</li>
+  <li><b>Full journey</b>: charts of when the channel started, when views started, when growth started, and which post was the game changer, with phases and quiet periods.</li>
+  <li><b>One post</b>: paste a single video link for a full breakdown.</li>
+</ul>
+<p>Viral posts, journey and one post work for <b>YouTube, TikTok and Instagram</b> only. Facebook and LinkedIn do not show per-post views publicly, so they are not supported there.</p>
+
+<h2 id="privacy">Privacy and safety</h2>
+<ul>
+  <li>Your data stays on your computer. There is no Posting Assistant server and no tracking.</li>
+  <li>Passwords are never typed by the app. You sign in yourself in each account's private window. Cookies are stored per account.</li>
+  <li>Saved API keys are encrypted with the operating system (Windows DPAPI, macOS Keychain) and never shown in the interface or logs.</li>
+  <li>The app window runs sandboxed with a strict content policy. Model output is shown as escaped text and never executed.</li>
+  <li>Safety checks while posting: only the target channel is switched on, the final button is checked, it stops on login or captcha pages, and a finished post is never sent twice.</li>
+  <li>Skills you import from GitHub or ZIP files are scanned for risky content before use.</li>
+  <li>Downloads happen only when you press Install: the optional Ollama installer, the whisper.cpp release and the speech models come from ollama.com, GitHub and Hugging Face. The Windows installer is unsigned.</li>
+</ul>
+
+<h2 id="limits">Honest limits</h2>
+<ul>
+  <li>The app drives websites you do not control. If Buffer changes its page, a step can fail. It then falls back to an AI click agent and tells you.</li>
+  <li>Reading TikTok and Instagram for the viral features follows the page layout but has not been verified live. Login walls can block it. Choose a signed-in account under "View with".</li>
+  <li>YouTube dates on old posts are coarse, so some dates are estimates and are marked with <code>~</code>.</li>
+  <li>The model cannot watch the video. Breakdowns use titles, descriptions and numbers only.</li>
+  <li>Jobs run one at a time.</li>
+</ul>
+
+<h2 id="build">Build it yourself</h2>
+<p>You need Node.js 24 or newer.</p>
+<pre><code>npm install
+npm start            # run from source
+npm run dist         # Windows installer (run on Windows)
+npm run dist:mac:arm64   # Mac, Apple Silicon (run on a Mac)
+npm run dist:mac:x64     # Mac, Intel (run on a Mac)</code></pre>
+<p>No Mac? Open the Actions tab on GitHub and run <b>Build Mac app</b>. It builds both Mac versions and attaches them to the run.</p>
+
+<h2 id="third">Third-party</h2>
+<ul>
+  <li>humanizer (MIT, Siqi Chen).</li>
+  <li>Instagram caption and reel skills (MIT, Jake Schincariol, from instagram-agent-skill).</li>
+  <li>Inter Tight and JetBrains Mono fonts (SIL Open Font License).</li>
+</ul>
+<p>The licence files for these live in the <code>assets</code> folder (<code>assets/fonts</code> and <code>assets/skills/github</code>). Posting Assistant itself is released under the MIT licence, see the <code>LICENSE</code> file.</p>
+
+<h2 id="notincluded">Not included</h2>
+<p>This repository holds source only. Left out on purpose: dependencies (<code>node_modules</code>, restored by <code>npm install</code>), build output (<code>dist</code>), local caches and logs, the test folder, development notes, and all personal settings, keys and account data. Installers are not stored in the repo; build them as described above.</p>
+
+<footer>
+  Created by Bunnys Framelab. Instagram <a href="https://www.instagram.com/bunnysframelab/">@bunnysframelab</a>.
+  Posting Assistant is not affiliated with Buffer, YouTube, Instagram, TikTok, Meta or any platform it works with. Use it within each platform's terms.
+</footer>
+</div>
+</body>
+</html>
